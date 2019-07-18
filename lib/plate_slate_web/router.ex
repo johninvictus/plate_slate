@@ -13,14 +13,17 @@ defmodule PlateSlateWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PlateSlateWeb do
+  scope "/web", PlateSlateWeb do
     pipe_through :browser
 
     get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", PlateSlateWeb do
-  #   pipe_through :api
-  # end
+  scope "/" do
+    pipe_through :api
+
+    forward "/api", Absinthe.Plug, schema: PlateSlateWeb.Schema
+    forward "/graphql", Absinthe.Plug.GraphiQL, schema: PlateSlateWeb.Schema, interface: :simple
+  end
 end
