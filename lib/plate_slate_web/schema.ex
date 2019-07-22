@@ -1,20 +1,21 @@
 defmodule PlateSlateWeb.Schema do
   use Absinthe.Schema
 
-  alias PlateSlate.{Menu, Repo}
   alias PlateSlateWeb.Resolvers
 
+  import_types(PlateSlateWeb.Schema.MenuTypes)
+  import_types(PlateSlateWeb.Schema.CustomTypes)
+
   query do
-    @desc "The list of available items on the menu"
     field :menu_items, list_of(:menu_item) do
-      arg(:matching, :string)
+      arg(:filter, :menu_item_filter)
+      arg(:order, type: :sort_order, default_value: :asc)
       resolve(&Resolvers.Menu.menu_items/3)
     end
   end
 
-  object :menu_item do
-    field :id, :id
-    field :name, :string
-    field :description, :string
+  enum :sort_order do
+    value(:asc)
+    value(:desc)
   end
 end
