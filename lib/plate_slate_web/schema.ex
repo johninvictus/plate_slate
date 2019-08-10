@@ -20,6 +20,13 @@ defmodule PlateSlateWeb.Schema do
     end
   end
 
+  mutation do
+    field :create_menu_item, :menu_item do
+      arg :input, non_null(:menu_item_input)
+      resolve &Resolvers.Menu.create_item/3
+    end
+  end
+
   enum :sort_order do
     value(:asc)
     value(:desc)

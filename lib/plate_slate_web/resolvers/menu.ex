@@ -14,4 +14,13 @@ defmodule PlateSlateWeb.Resolvers.Menu do
   def search(_, %{matching: term}, _) do
     {:ok, Menu.search(term)}
   end
+
+  def create_item(_, %{input: params}, _) do
+    case Menu.create_item(params) do
+      {:error, _} ->
+        {:error, "Could not create menu item"}
+      {:ok, _} = success ->
+        success
+    end
+  end
 end

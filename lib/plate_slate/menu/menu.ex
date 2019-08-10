@@ -61,6 +61,12 @@ defmodule PlateSlate.Menu do
     Enum.flat_map(@search, &search_ecto(&1, pattern))
   end
 
+  def create_item(attrs \\ Map.new()) do
+    %Item{}
+    |> Item.changeset(attrs)
+    |> Repo.insert
+  end
+
   defp search_ecto(ecto_schema, pattern) do
     Repo.all(
       from q in ecto_schema,
