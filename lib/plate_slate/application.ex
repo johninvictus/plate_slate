@@ -4,6 +4,7 @@ defmodule PlateSlate.Application do
   @moduledoc false
 
   use Application
+  import Supervisor.Spec
 
   def start(_type, _args) do
     # List all child processes to be supervised
@@ -11,9 +12,10 @@ defmodule PlateSlate.Application do
       # Start the Ecto repository
       PlateSlate.Repo,
       # Start the endpoint when the application starts
-      PlateSlateWeb.Endpoint
+      PlateSlateWeb.Endpoint,
       # Starts a worker by calling: PlateSlate.Worker.start_link(arg)
       # {PlateSlate.Worker, arg},
+      supervisor(Absinthe.Subscription, [PlateSlateWeb.Endpoint])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
