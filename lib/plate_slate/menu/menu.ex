@@ -64,7 +64,11 @@ defmodule PlateSlate.Menu do
   def create_item(attrs \\ Map.new()) do
     %Item{}
     |> Item.changeset(attrs)
-    |> Repo.insert
+    |> Repo.insert()
+  end
+
+  def get_item!(item_id) do
+    Repo.get!(Item, item_id)
   end
 
   defp search_ecto(ecto_schema, pattern) do

@@ -16,7 +16,7 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
     conn = build_conn()
     conn = get conn, "/api", query: @query
 
-    assert = %{"data" => items} = json_response(conn, 200)
+    assert %{"data" => items} = json_response(conn, 200)
   end
 
   @query """

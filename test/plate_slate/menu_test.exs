@@ -1,5 +1,5 @@
 defmodule PlateSlate.MenuTest do
-  use PlateSlate.DataCase
+  # use PlateSlate.DataCase
 
-  alias PlateSlate.Menu
+  # alias PlateSlate.Menu
 end
