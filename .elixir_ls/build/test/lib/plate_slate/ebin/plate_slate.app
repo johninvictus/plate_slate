@@ -32,6 +32,7 @@
                         'Elixir.PlateSlateWeb.Schema.CustomTypes',
                         'Elixir.PlateSlateWeb.Schema.MenuTypes',
                         'Elixir.PlateSlateWeb.Schema.OrderingTypes',
+                        'Elixir.PlateSlateWeb.SubscriptionCase',
                         'Elixir.PlateSlateWeb.UserSocket']},
               {registered,[]},
               {vsn,"0.1.0"},

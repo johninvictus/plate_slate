@@ -16,6 +16,16 @@ defmodule PlateSlate.Ordering do
     |> Repo.insert()
   end
 
+  def get_order!(id) do
+    Repo.get!(Order, id)
+  end
+
+  def update_order(%Order{} = order, attrs) do
+    order
+    |> Order.changeset(attrs)
+    |> Repo.update()
+  end
+
   defp build_item(items) do
     for item <- items do
       menu_item = PlateSlate.Menu.get_item!(item.menu_item_id)

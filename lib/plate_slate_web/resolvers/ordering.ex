@@ -17,6 +17,28 @@ defmodule PlateSlateWeb.Resolvers.Ordering do
     end
   end
 
+  def ready_order(_, %{id: id}, _) do
+    order = Ordering.get_order!(id)
+
+    with {:ok, order} <- Ordering.update_order(order, %{state: "ready"}) do
+      {:ok, %{order: order}}
+    else
+      {:error, changeset} ->
+        {:ok, %{errors: transform_errors(changeset)}}
+    end
+  end
+
+  def complete_order(_, %{id: id}, _) do
+    order = Ordering.get_order!(id)
+
+    with {:ok, order} <- Ordering.update_order(order, %{state: "complete"}) do
+      {:ok, %{order: order}}
+    else
+      {:error, changeset} ->
+        {:ok, %{errors: transform_errors(changeset)}}
+    end
+  end
+
   defp transform_errors(changeset) do
     changeset
     |> Ecto.Changeset.traverse_errors(&format_error/1)
