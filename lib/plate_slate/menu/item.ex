@@ -7,6 +7,7 @@ defmodule PlateSlate.Menu.Item do
     field :description, :string
     field :name, :string
     field :price, :decimal
+    field :allergy_info, {:array, :map}
 
     belongs_to :category, PlateSlate.Menu.Category
     many_to_many :tags, PlateSlate.Menu.ItemTag, join_through: "items_taggings"
@@ -17,7 +18,7 @@ defmodule PlateSlate.Menu.Item do
   @doc false
   def changeset(item, attrs) do
     item
-    |> cast(attrs, [:added_on, :description, :name, :price])
+    |> cast(attrs, [:added_on, :description, :name, :price, :allergy_info])
     |> validate_required([:name, :price])
     |> foreign_key_constraint(:category)
     |> unique_constraint(:name)
