@@ -2,10 +2,19 @@ defmodule PlateSlateWeb.Schema do
   use Absinthe.Schema
 
   alias PlateSlateWeb.Resolvers
+  alias PlateSlateWeb.Schema.Middleware
 
   import_types(PlateSlateWeb.Schema.MenuTypes)
   import_types(PlateSlateWeb.Schema.OrderingTypes)
   import_types(PlateSlateWeb.Schema.CustomTypes)
+
+  def middleware(middleware, _field, %{identifier: :mutation}) do
+    middleware ++ [Middleware.ChangesetErrors]
+  end
+
+  def middleware(middleware, _field, _object) do
+    middleware
+  end
 
   query do
     field :menu_items, list_of(:menu_item) do

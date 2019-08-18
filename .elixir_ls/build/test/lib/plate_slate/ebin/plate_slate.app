@@ -31,6 +31,7 @@
                         'Elixir.PlateSlateWeb.Schema',
                         'Elixir.PlateSlateWeb.Schema.CustomTypes',
                         'Elixir.PlateSlateWeb.Schema.MenuTypes',
+                        'Elixir.PlateSlateWeb.Schema.Middleware.ChangesetErrors',
                         'Elixir.PlateSlateWeb.Schema.OrderingTypes',
                         'Elixir.PlateSlateWeb.SubscriptionCase',
                         'Elixir.PlateSlateWeb.UserSocket']},
