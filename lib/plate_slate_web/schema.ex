@@ -48,6 +48,17 @@ defmodule PlateSlateWeb.Schema do
       config(fn _arg, _info ->
         {:ok, topic: "*"}
       end)
+
+      trigger(:place_order,
+        topic: fn
+          %{order: _order} -> ["*"]
+          _ -> []
+        end
+      )
+
+      resolve(fn %{order: order}, _, _ ->
+        {:ok, order}
+      end)
     end
 
     field :update_order, :order do
@@ -68,8 +79,6 @@ defmodule PlateSlateWeb.Schema do
         {:ok, order}
       end)
     end
-
-
   end
 
   enum :sort_order do
