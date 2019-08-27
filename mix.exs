@@ -46,7 +46,8 @@ defmodule PlateSlate.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4.0"},
-      {:absinthe_phoenix, "~> 1.4.0"}
+      {:absinthe_phoenix, "~> 1.4.0"},
+      {:comeonin, "~> 5.1.2"}
     ]
   end
 
