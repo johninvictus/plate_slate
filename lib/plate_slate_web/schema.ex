@@ -7,6 +7,7 @@ defmodule PlateSlateWeb.Schema do
   import_types(PlateSlateWeb.Schema.MenuTypes)
   import_types(PlateSlateWeb.Schema.OrderingTypes)
   import_types(PlateSlateWeb.Schema.CustomTypes)
+  import_types(PlateSlateWeb.Schema.AccountsTypes)
 
   def middleware(middleware, field, %{identifier: :allergy_info} = object) do
     new_middleware = {Absinthe.Middleware.MapGet, to_string(field.identifier)}
@@ -57,6 +58,14 @@ defmodule PlateSlateWeb.Schema do
       arg(:id, non_null(:id))
       resolve(&Resolvers.Ordering.complete_order/3)
     end
+
+    field :login, :session do
+      arg :email, non_null(:string)
+      arg :password, non_null(:string)
+      arg :role, non_null(:role)
+
+      resolve &Resolvers.Accounts.login/3
+    end
   end
 
   subscription do
@@ -95,10 +104,5 @@ defmodule PlateSlateWeb.Schema do
         {:ok, order}
       end)
     end
-  end
-
-  enum :sort_order do
-    value(:asc)
-    value(:desc)
   end
 end

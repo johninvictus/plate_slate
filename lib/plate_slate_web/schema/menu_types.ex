@@ -82,4 +82,10 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
         nil
     end)
   end
+
+  enum :sort_order do
+    value(:asc)
+    value(:desc)
+  end
+
 end
